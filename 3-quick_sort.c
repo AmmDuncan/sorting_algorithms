@@ -22,6 +22,7 @@ void quick_sort(int *array, size_t size)
 void partition(int *array, size_t size, int start, int end)
 {
 	int i, pivot = end;
+
 	if (start >= end)
 		return;
 
