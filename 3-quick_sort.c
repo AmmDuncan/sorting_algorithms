@@ -35,16 +35,23 @@ void partition(int *array, size_t size, int start, int end)
 		else
 		{
 			lower_end++;
-			temp = array[i];
-			array[i] = array[lower_end];
-			array[lower_end] = temp;
+			if (lower_end != i)
+			{
+				temp = array[i];
+				array[i] = array[lower_end];
+				array[lower_end] = temp;
+				print_array(array, size);
+			}
 		}
 	}
 	lower_end++;
-	temp = array[lower_end];
-	array[lower_end] = array[end];
-	array[end] = temp;
-	print_array(array, size);
+	if (lower_end != end)
+	{
+		temp = array[lower_end];
+		array[lower_end] = array[end];
+		array[end] = temp;
+		print_array(array, size);
+	}
 
 	partition(array, size, start, lower_end - 1);
 	partition(array, size, lower_end + 1, end);
