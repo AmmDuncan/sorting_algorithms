@@ -27,5 +27,7 @@ void remove_node(listint_t *node);
 void insert_bef_n_aft(listint_t *node, listint_t *before, listint_t *after);
 void selection_sort(int *array, size_t size);
 size_t find_min_index(int *array, size_t size, size_t start);
+void quick_sort(int *array, size_t size);
+void partition(int *array, size_t size, int start, int end);
 
 #endif
