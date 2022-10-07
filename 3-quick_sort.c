@@ -21,25 +21,31 @@ void quick_sort(int *array, size_t size)
  */
 void partition(int *array, size_t size, int start, int end)
 {
-	int i, pivot = end;
+	int lower_end, i, pivot, temp;
 
 	if (start >= end)
 		return;
 
-	for (i = pivot; i >= start; i--)
+	pivot = array[end];
+	lower_end = start - 1;
+	for (i = start; i < end; i++)
 	{
-		if (array[pivot] < array[i])
+		if (array[i] > pivot)
+			continue;
+		else
 		{
-			int temp;
-
-			temp = array[pivot];
-			array[pivot] = array[i];
-			pivot = pivot - 1;
-			array[i] = array[pivot];
-			array[pivot] = temp;
+			lower_end++;
+			temp = array[i];
+			array[i] = array[lower_end];
+			array[lower_end] = temp;
 		}
 	}
+	lower_end++;
+	temp = array[lower_end];
+	array[lower_end] = array[end];
+	array[end] = temp;
 	print_array(array, size);
-	partition(array, size, start, pivot - 1);
-	partition(array, size, pivot + 1, end);
+
+	partition(array, size, start, lower_end - 1);
+	partition(array, size, lower_end + 1, end);
 }
