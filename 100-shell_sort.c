@@ -40,6 +40,7 @@ void shell_sort(int *array, size_t size)
 void swap(int *array, size_t size, int first, int second)
 {
 	int temp;
+
 	if (size < 0)
 		return;
 
