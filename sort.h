@@ -29,5 +29,7 @@ void selection_sort(int *array, size_t size);
 size_t find_min_index(int *array, size_t size, size_t start);
 void quick_sort(int *array, size_t size);
 void partition(int *array, size_t size, int start, int end);
+void swap(int *array, size_t size, int first, int second);
+void shell_sort(int *array, size_t size);
 
 #endif

@@ -21,7 +21,7 @@ void quick_sort(int *array, size_t size)
  */
 void partition(int *array, size_t size, int start, int end)
 {
-	int lower_end, i, pivot, temp;
+	int lower_end, i, pivot;
 
 	if (start >= end)
 		return;
@@ -36,23 +36,30 @@ void partition(int *array, size_t size, int start, int end)
 		{
 			lower_end++;
 			if (lower_end != i)
-			{
-				temp = array[i];
-				array[i] = array[lower_end];
-				array[lower_end] = temp;
-				print_array(array, size);
-			}
+				swap(array, size, lower_end, i);
 		}
 	}
 	lower_end++;
 	if (lower_end != end)
-	{
-		temp = array[lower_end];
-		array[lower_end] = array[end];
-		array[end] = temp;
-		print_array(array, size);
-	}
+		swap(array, size, lower_end, end);
 
 	partition(array, size, start, lower_end - 1);
 	partition(array, size, lower_end + 1, end);
+}
+
+/**
+ * swap - swap elements at positions
+ * @array: array to swap elements
+ * @size: size of array to swap
+ * @first: first position
+ * @second: second position
+ */
+void swap(int *array, size_t size, int first, int second)
+{
+	int temp;
+
+	temp = array[first];
+	array[first] = array[second];
+	array[second] = temp;
+	print_array(array, size);
 }
