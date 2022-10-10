@@ -8,16 +8,13 @@
 void cocktail_sort_list(listint_t **list)
 {
 	listint_t *cur, *next, *iter, *iter_next, *iter_prev, *end;
-	int swapped;
+	int swapped = 1;
 
 	if (list == NULL || *list == NULL)
 		return;
-
 	end = *list;
 	while (end->next)
 		end = end->next;
-
-	swapped = 1;
 	while (swapped)
 	{
 		swapped = 0;
@@ -28,37 +25,47 @@ void cocktail_sort_list(listint_t **list)
 			while (iter->next && iter->n > cur->next->n)
 			{
 				iter_next = iter->next;
-				/*printf("Comparing: %d and %d\n", iter->n, iter_next->n);*/
-				remove_node(iter_next);
-				insert_bef_n_aft(iter_next, iter, iter->prev);
+				swap_list(list, &end, iter_next, iter, iter->prev);
 				swapped = 1;
-				if (iter == *list)
-					*list = iter->prev;
-				if (iter_next == end)
-					end = iter;
 				print_list(*list);
 			}
-
+			iter = end->prev;
 			if (swapped)
-			{
-				iter = end->prev;
 				while (iter->prev && iter->n < iter->prev->n)
 				{
 					iter_prev = iter->prev;
 					/*printf("Comparing: %d and %d\n", iter->n, iter_prev->n);*/
-					remove_node(iter);
-					insert_bef_n_aft(iter, iter_prev, iter_prev->prev);
+					swap_list(list, &end, iter, iter_prev, iter_prev->prev);
 					swapped = 1;
-					if (iter_prev == *list)
-						*list = iter;
-					if (iter == end)
-						end = iter_prev;
 					print_list(*list);
 				}
-			}
 			cur = next;
 		}
 	}
+}
+
+/**
+ * swap_list - swap nodes in a list
+ *
+ * @list: list
+ * @end: end of list
+ * @node: node to move
+ * @bef: to insert before
+ * @aft: to insert after
+ */
+void swap_list(
+		listint_t **list,
+		listint_t **end,
+		listint_t *node,
+		listint_t *bef,
+		listint_t *aft)
+{
+	remove_node(node);
+	insert_bef_n_aft(node, bef, aft);
+	if (bef == *list)
+		*list = node;
+	if (node == *end)
+		*end = bef;
 }
 
 /**

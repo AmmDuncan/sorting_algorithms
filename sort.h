@@ -32,5 +32,6 @@ void partition(int *array, size_t size, int start, int end);
 void swap(int *array, size_t size, int first, int second);
 void shell_sort(int *array, size_t size);
 void cocktail_sort_list(listint_t **list);
+void swap_list(listint_t **list, listint_t **end, listint_t *node, listint_t *bef, listint_t *aft);
 
 #endif
