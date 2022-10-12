@@ -7,12 +7,14 @@
  */
 void counting_sort(int *array, size_t size)
 {
-	int max = array[0];
+	int max;
 	size_t i = 0;
 	int *count_arr, *copy;
 
 	if (!array || size < 2)
 		return;
+
+	max = array[0];
 
 	copy = malloc(sizeof(int) * size);
 	while (i < size)
