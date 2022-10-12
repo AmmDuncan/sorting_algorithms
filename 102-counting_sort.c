@@ -11,7 +11,7 @@ void counting_sort(int *array, size_t size)
 	size_t i = 0;
 	int *count_arr, *copy;
 
-	if (size < 2)
+	if (!array || size < 2)
 		return;
 
 	copy = malloc(sizeof(int) * size);
@@ -46,4 +46,3 @@ void counting_sort(int *array, size_t size)
 	free(count_arr);
 	free(copy);
 }
-
