@@ -11,6 +11,9 @@ void counting_sort(int *array, size_t size)
 	size_t i = 0;
 	int *count_arr, *copy;
 
+	if (size < 2)
+		return;
+
 	copy = malloc(sizeof(int) * size);
 	while (i < size)
 	{
