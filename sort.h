@@ -38,5 +38,6 @@ void swap_list(
 		listint_t *node,
 		listint_t *bef,
 		listint_t *aft);
+void counting_sort(int *array, size_t size);
 
 #endif
