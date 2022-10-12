@@ -7,7 +7,7 @@
  */
 void cocktail_sort_list(listint_t **list)
 {
-	listint_t *cur, *next, *iter, *iter_next, *iter_prev, *end;
+	listint_t *cur, *iter, *iter_next, *iter_prev, *end;
 	int swapped = 1;
 
 	if (list == NULL || *list == NULL)
@@ -19,7 +19,7 @@ void cocktail_sort_list(listint_t **list)
 	{
 		swapped = 0;
 		cur = *list;
-		while ((next = cur->next))
+		while (cur)
 		{
 			iter = cur;
 			while (iter->next && iter->n > cur->next->n)
@@ -29,17 +29,22 @@ void cocktail_sort_list(listint_t **list)
 				swapped = 1;
 				print_list(*list);
 			}
-			iter = end->prev;
-			if (swapped)
-				while (iter->prev && iter->n < iter->prev->n)
-				{
-					iter_prev = iter->prev;
-					/*printf("Comparing: %d and %d\n", iter->n, iter_prev->n);*/
-					swap_list(list, &end, iter, iter_prev, iter_prev->prev);
-					swapped = 1;
-					print_list(*list);
-				}
-			cur = next;
+
+			cur = cur->next;
+		}
+		cur = end;
+		while (cur)
+		{
+			iter = cur;
+			while (iter->prev && iter->n < cur->prev->n)
+			{
+				iter_prev = iter->prev;
+				swap_list(list, &end, iter, iter_prev, iter_prev->prev);
+				swapped = 1;
+				print_list(*list);
+			}
+
+			cur = cur->prev;
 		}
 	}
 }
